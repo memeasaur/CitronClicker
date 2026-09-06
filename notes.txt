@@ -1,3 +1,4 @@
 >make enable and disable keybinds instead of toggle
 >maybe make the double clicker work and implement keybinds for it
 >make it only click on minecraft if config
+>make it let me have multiple click range setups
