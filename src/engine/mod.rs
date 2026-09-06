@@ -2,7 +2,7 @@
 
 pub mod timing;
 
-use crate::os;
+use crate::{engine, os};
 use eframe::egui;
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::mpsc::{Receiver, Sender, channel};
@@ -576,6 +576,11 @@ fn key_poll_loop(
 
         let snap = { cfg.lock().unwrap().clone() };
 
+        // me start
+        TODO;
+        sig.suspend_left.store(os::key_held(vk_from_name("G")), Ordering::Relaxed);
+        sig.suspend_left.store(os::key_held(vk_from_name("H")), Ordering::Relaxed);
+        // me end
         sig.suspend_left.store(
             snap.left.suspend_vk != 0 && os::key_held(snap.left.suspend_vk),
             Ordering::Relaxed,
