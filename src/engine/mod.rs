@@ -559,6 +559,10 @@ fn key_poll_loop(
     tx: Sender<ToggleReq>,
     ctx: egui::Context,
 ) {
+    // me start
+    let mut enable_was = false;
+    let mut disable_was = false;
+    // me end
     let mut left_was = true; // need a release before the first edge counts
     let mut right_was = true;
     let mut panic_was = true;
@@ -596,10 +600,14 @@ fn key_poll_loop(
 
         // me start
         TODO;
-        sig.suspend_left
-            .store(os::key_held(vk_from_name("G")), Ordering::Relaxed);
-        sig.suspend_left
-            .store(os::key_held(vk_from_name("H")), Ordering::Relaxed);
+        edge(vk_from_name("G"), &mut enable_was, || {
+            cfg.lock().unwrap().left.enabled = true;
+            let _ = tx.send(ToggleReq::Left);
+            ctx.request_repaint();
+        });
+        edge(vk_from_name("H"), &mut disable_was, || {
+            TODO;
+        });
         // me end
 
         // flip the live config here so the clicker stops/starts instantly, without waiting on a ui
