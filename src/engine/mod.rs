@@ -599,14 +599,15 @@ fn key_poll_loop(
         );
 
         // me start
-        TODO;
         edge(vk_from_name("G"), &mut enable_was, || {
             cfg.lock().unwrap().left.enabled = true;
             let _ = tx.send(ToggleReq::Left);
             ctx.request_repaint();
         });
         edge(vk_from_name("H"), &mut disable_was, || {
-            TODO;
+            cfg.lock().unwrap().left.enabled = false;
+            let _ = tx.send(ToggleReq::Left);
+            ctx.request_repaint();
         });
         // me end
 
