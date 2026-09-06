@@ -2,7 +2,7 @@
 
 pub mod timing;
 
-use crate::{engine, os};
+use crate::os;
 use eframe::egui;
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::mpsc::{Receiver, Sender, channel};
@@ -281,7 +281,11 @@ fn clicker_loop(
         let (snap, audio_cfg) = {
             let c = cfg.lock().unwrap();
             (
-                if is_left { c.left.clone() } else { c.right.clone() },
+                if is_left {
+                    c.left.clone()
+                } else {
+                    c.right.clone()
+                },
                 c.audio,
             )
         };
@@ -409,7 +413,11 @@ fn jitter_loop(is_left: bool, sig: Arc<EngineSignals>, cfg: Arc<Mutex<EngineConf
     while sig.running.load(Ordering::Relaxed) {
         let snap = {
             let c = cfg.lock().unwrap();
-            if is_left { c.left.clone() } else { c.right.clone() }
+            if is_left {
+                c.left.clone()
+            } else {
+                c.right.clone()
+            }
         };
         let suspend = if is_left {
             sig.suspend_left.load(Ordering::Relaxed)
@@ -508,7 +516,8 @@ fn blockhit_loop(sig: Arc<EngineSignals>, cfg: Arc<Mutex<EngineConfig>>) {
             if now >= t {
                 os::click_down(false);
                 blocking = true;
-                release_at = now + Duration::from_secs_f64(pick(bh.min_hold, bh.max_hold, &mut rng));
+                release_at =
+                    now + Duration::from_secs_f64(pick(bh.min_hold, bh.max_hold, &mut rng));
                 press_at = None;
             }
         }
@@ -576,11 +585,6 @@ fn key_poll_loop(
 
         let snap = { cfg.lock().unwrap().clone() };
 
-        // me start
-        TODO;
-        sig.suspend_left.store(os::key_held(vk_from_name("G")), Ordering::Relaxed);
-        sig.suspend_left.store(os::key_held(vk_from_name("H")), Ordering::Relaxed);
-        // me end
         sig.suspend_left.store(
             snap.left.suspend_vk != 0 && os::key_held(snap.left.suspend_vk),
             Ordering::Relaxed,
@@ -589,6 +593,14 @@ fn key_poll_loop(
             snap.right.suspend_vk != 0 && os::key_held(snap.right.suspend_vk),
             Ordering::Relaxed,
         );
+
+        // me start
+        TODO;
+        sig.suspend_left
+            .store(os::key_held(vk_from_name("G")), Ordering::Relaxed);
+        sig.suspend_left
+            .store(os::key_held(vk_from_name("H")), Ordering::Relaxed);
+        // me end
 
         // flip the live config here so the clicker stops/starts instantly, without waiting on a ui
         // frame: citron is usually occluded behind the game where request_repaint may not paint, so
