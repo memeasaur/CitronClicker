@@ -1,3 +1,4 @@
 >maybe make the double clicker work and implement keybinds for it
 >make it only keybind toggle if minecraft focused
 >make it let me have multiple click range setups
+>it might take 10ms to enable? I don't want that
