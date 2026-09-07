@@ -3,7 +3,7 @@
 use std::f64::consts::TAU;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-const MAX_CPS_UI: f64 = 20.0;
+const MAX_CPS_UI: f64 = 25.0;
 
 /// xoshiro256**, seeded from the clock + a per-side salt via splitmix64
 pub struct Rng {

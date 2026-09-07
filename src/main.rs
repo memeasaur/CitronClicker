@@ -901,7 +901,10 @@ fn fmt_cps(v: f32) -> String {
 fn dual_range(ui: &mut egui::Ui, min: &mut f32, max: &mut f32, accent: Color32) {
     let (rect, resp) =
         ui.allocate_exact_size(Vec2::new(ui.available_width(), 26.0), Sense::click_and_drag());
-    let (lo, hi) = (1.0_f32, 20.0_f32);
+    // let (lo, hi) = (1.0_f32, 20.0_f32); // me
+    // me start
+    let (lo, hi) = (1.0_f32, 22.0_f32);
+    // me end
     let to_x = |v: f32| rect.left() + (v - lo) / (hi - lo) * rect.width();
 
     if resp.dragged() || resp.clicked() {

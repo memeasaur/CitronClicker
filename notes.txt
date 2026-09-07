@@ -3,10 +3,11 @@
 >w/ suppression: 19-20
 >make it let me have multiple click range setups
     >+ the ability the press a button and get better cps?
->raise the limit higher than 20 so I can test more with hit suppression
 
+>make the double clicker toggleable with keybinds
+    >ensure it doesn't ever run at the same time as the autoclicker
+    >NVM this shit flags
 >it might take 10ms to enable? I don't want that
 >make that one setting not stop inventory clicks so I can use it
 
 >make it only keybind toggle if minecraft focused?
->maybe make the double clicker work and implement keybinds for it
