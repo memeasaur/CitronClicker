@@ -1,4 +1,8 @@
->maybe make the double clicker work and implement keybinds for it
->make it only keybind toggle if minecraft focused
 >make it let me have multiple click range setups
+    >+ the ability the press a button and get better cps?
 >it might take 10ms to enable? I don't want that
+>raise the limit higher than 20
+>make that one setting not stop inventory clicks so I can use it
+
+>make it only keybind toggle if minecraft focused?
+>maybe make the double clicker work and implement keybinds for it
