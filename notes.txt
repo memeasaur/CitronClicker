@@ -1,7 +1,10 @@
+>9-16
+>8-20. (9-9.5)-20?
+
 >make it let me have multiple click range setups
     >+ the ability the press a button and get better cps?
 >it might take 10ms to enable? I don't want that
->raise the limit higher than 20
+>raise the limit higher than 20 so I can test more with hit suppression
 >make that one setting not stop inventory clicks so I can use it
 
 >make it only keybind toggle if minecraft focused?
