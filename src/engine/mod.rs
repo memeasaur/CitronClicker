@@ -642,17 +642,17 @@ fn key_poll_loop(
                 _ = tx.send(ToggleReq::SetCps { min: min_cps, max: max_cps });
             };
             edge(vk_from_name("k"), &mut decrement_severity_was, || {
-                if (current_severity_index == SEVERITIES.len() - 1) {
-                    return;
-                }
-                current_severity_index += 1; // TODO -> assert?
-                apply(current_severity_index); // TODO -> ?
-            });
-            edge(vk_from_name("l"), &mut increment_severity_was, || {
                 if (current_severity_index == 0) {
                     return;
                 }
-                current_severity_index -= 1;
+                current_severity_index -= 1; // TODO -> assert?
+                apply(current_severity_index); // TODO -> ?
+            });
+            edge(vk_from_name("l"), &mut increment_severity_was, || {
+                if (current_severity_index == SEVERITIES.len() - 1) {
+                    return;
+                }
+                current_severity_index += 1;
                 apply(current_severity_index);
             });
         }
