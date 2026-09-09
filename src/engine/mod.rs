@@ -86,6 +86,9 @@ pub enum ToggleReq {
     Left,
     Right,
     BlockHit,
+    // me start
+    SetCps { min: f32, max: f32 }
+    // me end
 }
 
 pub struct EngineHandle {
@@ -562,6 +565,19 @@ fn key_poll_loop(
     // me start
     let mut enable_was = false;
     let mut disable_was = false;
+    let mut decrement_severity_was = false;
+    let mut increment_severity_was = false;
+    enum Severity {
+        TwelveAndHalfCPS,
+        ThirteenCPS,
+        FourteenCPS,
+    }
+    const SEVERITIES: [Severity; 3] = [
+        Severity::TwelveAndHalfCPS,
+        Severity::ThirteenCPS, // TODO -> wtf rust
+        Severity::FourteenCPS,
+    ];
+    let mut current_severity_index = 0;
     // me end
     let mut left_was = true; // need a release before the first edge counts
     let mut right_was = true;
@@ -613,6 +629,33 @@ fn key_poll_loop(
             cfg.lock().unwrap().left.enabled = false;
             ctx.request_repaint();
         });
+        // onSeverityChange
+        {
+            let apply = |severity| {
+                let (min_cps, max_cps) = match SEVERITIES[severity] {
+                    Severity::TwelveAndHalfCPS => (9., 16.),
+                    Severity::ThirteenCPS => (6., 20.),
+                    Severity::FourteenCPS => (8., 20.),
+                };
+                cfg.lock().unwrap().left.min_cps = min_cps;
+                cfg.lock().unwrap().left.max_cps = max_cps;
+                _ = tx.send(ToggleReq::SetCps { min: min_cps, max: max_cps });
+            };
+            edge(vk_from_name("k"), &mut decrement_severity_was, || {
+                if (current_severity_index == SEVERITIES.len() - 1) {
+                    return;
+                }
+                current_severity_index += 1; // TODO -> assert?
+                apply(current_severity_index); // TODO -> ?
+            });
+            edge(vk_from_name("l"), &mut increment_severity_was, || {
+                if (current_severity_index == 0) {
+                    return;
+                }
+                current_severity_index -= 1;
+                apply(current_severity_index);
+            });
+        }
         // me end
 
         // flip the live config here so the clicker stops/starts instantly, without waiting on a ui

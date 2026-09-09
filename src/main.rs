@@ -616,6 +616,12 @@ impl CitronApp {
                 ToggleReq::Left => self.left.enabled = !self.left.enabled,
                 ToggleReq::Right => self.right.enabled = !self.right.enabled,
                 ToggleReq::BlockHit => self.blockhit.enabled = !self.blockhit.enabled,
+                // me start
+                ToggleReq::SetCps { min, max } => {
+                    self.left.min_cps = min;
+                    self.left.max_cps = max;
+                }
+                // me end
             }
         }
         let ec = self.to_engine_config();
