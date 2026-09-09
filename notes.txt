@@ -2,7 +2,7 @@
 >(6-9?)-20
 >w/ suppression: 19-20
 >make it let me have multiple click range setups
-    >+ keybind for upgrading and downgrading the cps tier
+    >+ keybinds for upgrading and downgrading the cps tier
 >TODO -> test that the higher than 20 cps values are actually working
 
 >make the double clicker toggleable with keybinds
