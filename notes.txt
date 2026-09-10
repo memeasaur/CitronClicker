@@ -1,5 +1,6 @@
->make cps value over 20 be a different color?
+>implement recorded mouse movements instead of that terrible thing it has
 
+>make cps value over 20 be a different color?
 >make the double clicker toggleable with keybinds
     >ensure it doesn't ever run at the same time as the autoclicker
     >NVM this shit flags
