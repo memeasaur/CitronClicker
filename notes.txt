@@ -1,4 +1,5 @@
 >implement recorded mouse movements instead of that terrible thing it has
+>change the citron name on the taskbar to my current cps setting
 
 >make cps value over 20 be a different color?
 >make the double clicker toggleable with keybinds
