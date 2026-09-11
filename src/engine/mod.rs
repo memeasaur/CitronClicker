@@ -633,9 +633,9 @@ fn key_poll_loop(
         {
             let apply = |severity| {
                 let (min_cps, max_cps) = match SEVERITIES[severity] {
-                    Severity::TwelveAndHalfCPS => (9., 16.),
-                    Severity::ThirteenCPS => (6., 20.),
-                    Severity::FourteenCPS => (7., 20.),
+                    Severity::TwelveAndHalfCPS => (8., 16.),
+                    Severity::ThirteenCPS => (8., 17.),
+                    Severity::FourteenCPS => (9., 16.), // 8, 18 can flag a decent amount, but could be the limit
                 };
                 cfg.lock().unwrap().left.min_cps = min_cps;
                 cfg.lock().unwrap().left.max_cps = max_cps;
